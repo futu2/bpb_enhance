@@ -2,6 +2,17 @@ use crate::pck;
 use anyhow::{Context, Result};
 use std::fs::OpenOptions;
 
+macro_rules! replace_files {
+    ( $pck_file:expr, $entry_offsets:expr, { $( $res_path:literal => $asset_path:literal ),* $(,)? } ) => {{
+        $(
+            {
+                let replace_content: &[u8] = include_bytes!($asset_path);
+                $crate::pck::replace_file_in_pck($pck_file, $entry_offsets, $res_path, replace_content)?;
+            }
+        )*
+    }};
+}
+
 /// 修改指定路径 pck 文件
 pub fn tweak_game_gde(file_path: &str) -> Result<()> {
     let mut file = OpenOptions::new()
@@ -16,16 +27,10 @@ pub fn tweak_game_gde(file_path: &str) -> Result<()> {
     //     println!("Path: {}, Offset: {}", path, offset);
     // });
 
-    let replace_content = include_bytes!("../assets/Game.gde");
-    pck::replace_file_in_pck(&mut file, &index, "res://Core/Game.gde", replace_content)?;
-
-    let replace_content = include_bytes!("../assets/ItemLibrary.gde");
-    pck::replace_file_in_pck(
-        &mut file,
-        &index,
-        "res://Interface/ItemLibrary/ItemLibrary.gde",
-        replace_content,
-    )?;
+    replace_files!(&mut file, &index, {
+        "res://Core/Game.gde" => "../assets/Game.gde",
+        "res://Interface/ItemLibrary/ItemLibrary.gde" => "../assets/ItemLibrary.gde",
+    });
 
     Ok(())
 }
