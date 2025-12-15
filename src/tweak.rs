@@ -31,6 +31,8 @@ pub fn tweak_game_gde(file_path: &str) -> Result<()> {
         "res://Core/Game.gde" => "../assets/Game.gde",
         "res://Interface/ItemLibrary/ItemLibrary.gde" => "../assets/ItemLibrary.gde",
         "res://Core/Main.tscn" => "../assets/Main.tscn",
+        "res://Interface/BuildHistory/BuildHistory.gde" => "../assets/BuildHistory.gde",
+        "res://Interface/BuildHistory/BuildHistory.tscn" => "../assets/BuildHistory.tscn",
     });
 
     Ok(())
