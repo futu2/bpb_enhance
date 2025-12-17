@@ -35,4 +35,4 @@
 
 ## 参考视频
 
-![安装教程](https://www.bilibili.com/video/BV1MFmUBeEK2)
+[安装教程](https://www.bilibili.com/video/BV1MFmUBeEK2)
