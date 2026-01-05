@@ -1,0 +1,6 @@
+"res://Core/Game.gde" = "../assets/Game.gde"
+"res://Interface/ItemLibrary/ItemLibrary.gde" = "../assets/ItemLibrary.gde"
+"res://Core/Main.tscn" = "../assets/Main.tscn"
+"res://Interface/BuildHistory/BuildHistory.gde" = "../assets/BuildHistory.gde"
+"res://Interface/BuildHistory/BuildHistory.tscn" = "../assets/BuildHistory.tscn"
+"res://Interface/BuildHistory/BuildHistoryData.gde" = "../assets/BuildHistoryData.gde"
