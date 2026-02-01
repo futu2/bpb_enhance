@@ -38,7 +38,6 @@ plugin-version = "0.6.1"
 "res://Interface/Tooltips/ItemTooltip.gde" = "../assets/Interface/Tooltips/ItemTooltip.gde"
 
 "res://Items/Item.gde" = "../assets/Items/Item.gde"
-"res://pluginversion.txt" = "../assets/pluginversion.txt"
 
 "res://Utility/BuildHistoryDB.gde" = "../assets/Utility/BuildHistoryDB.gde"
 "res://Utility/CustomRules.gde" = "../assets/Utility/CustomRules.gde"
