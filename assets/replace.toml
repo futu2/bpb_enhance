@@ -1,3 +1,11 @@
+[version]
+required-game-version = "1.0.10b"
+plugin-version = "0.6.1"
+
+[version-hash]
+"1.0.9b" = "i dont know hash of this version"
+"1.0.10b" = "597baead816b32429c2ea9ac5f340ae8"
+
 [replace]
 "res://Core/Combat.gde" = "../assets/Core/Combat.gde"
 "res://Core/Game.gde" = "../assets/Core/Game.gde"

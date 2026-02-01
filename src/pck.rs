@@ -4,7 +4,7 @@ use std::{
     io::{BufReader, BufWriter, Read, Seek, SeekFrom, Write},
 };
 
-use anyhow::{Context, Result, anyhow};
+use anyhow::{anyhow, Context, Result};
 use binrw::{BinRead, BinWrite};
 use multi_index_map::MultiIndexMap;
 
@@ -28,15 +28,15 @@ pub struct Header {
 #[derive(BinRead, Debug, Clone)]
 #[br(little)]
 pub struct RawFileEntry {
-    path_len: u32,
+    pub path_len: u32,
 
     #[br(count = path_len)]
-    path_bytes: Vec<u8>,
+    pub path_bytes: Vec<u8>,
 
-    offset: u64,
-    size: u64,
+    pub offset: u64,
+    pub size: u64,
 
-    md5: [u8; 16],
+    pub md5: [u8; 16],
 }
 
 impl RawFileEntry {

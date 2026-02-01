@@ -18,6 +18,54 @@ permissions:
   contents: write
 
 jobs:
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin, x86_64-apple-darwin
+
+      - name: Cache cargo builds
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: Build release binary (x86_64)
+        run: cargo build --locked --release --features gui --target x86_64-apple-darwin
+
+      - name: Build release binary (aarch64)
+        run: cargo build --locked --release --features gui --target aarch64-apple-darwin
+
+      - name: Collect artifacts (x86_64)
+        run: |
+          out="dist/x86_64"
+          mkdir -p "$out"
+          cp "target/x86_64-apple-darwin/release/${BIN_NAME}" "$out/"
+
+      - name: Collect artifacts (aarch64)
+        run: |
+          out="dist/aarch64"
+          mkdir -p "$out"
+          cp "target/aarch64-apple-darwin/release/${BIN_NAME}" "$out/"
+
+      - name: Create Universal Binary
+        run: lipo -create -output dist/bpb_enhance dist/x86_64/bpb_enhance dist/aarch64/bpb_enhance
+
+      - name: Rename for macOS
+        run: mv dist/bpb_enhance dist/${BIN_NAME}-macos
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpb_enhance-macos
+          path: dist
+          if-no-files-found: error
+
   build-windows:
     runs-on: windows-latest
 
@@ -34,7 +82,7 @@ jobs:
           cache-on-failure: true
 
       - name: Build release binary
-        run: cargo build --locked --release
+        run: cargo build --locked --release --features gui
 
       - name: Collect artifacts
         shell: pwsh
@@ -50,9 +98,33 @@ jobs:
           path: dist
           if-no-files-found: error
 
+  release:
+    name: Create GitHub Release
+    needs: [build-macos, build-windows]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: bpb_enhance-macos
+          path: dist/macos
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: bpb_enhance-windows
+          path: dist/windows
+
+      - name: Rename macOS binary
+        run: mv dist/macos/bpb_enhance-macos dist/bpb_enhance-macos
+
+      - name: Rename Windows binary
+        run: mv dist/windows/bpb_enhance.exe dist/bpb_enhance.exe
+
       - name: Create GitHub Release and upload assets
-        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: dist/**
-
+          tag_name: ${{ github.ref_name }}
