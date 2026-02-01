@@ -1,0 +1,562 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Interface/FocusGrabbingControl.gd" type="Script" id=1]
+[ext_resource path="res://Interface/VScrollbar.png" type="Texture" id=2]
+[ext_resource path="res://Interface/VScrollbar_grabber.png" type="Texture" id=3]
+[ext_resource path="res://Interface/Options/OptionsSheet.png" type="Texture" id=4]
+[ext_resource path="res://Utility/DraggableRichTextLabel.gd" type="Script" id=5]
+[ext_resource path="res://Interface/PatchNotes.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Fonts/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/Fonts/LibreBaskerville-Bold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Assets/Fonts/GlassAntiqua-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Assets/Divider1.png" type="Texture" id=10]
+[ext_resource path="res://Utility/LocalizedControl.gd" type="Script" id=11]
+[ext_resource path="res://Interface/EmptyStylebox.tres" type="StyleBox" id=12]
+[ext_resource path="res://Interface/Options/OptionsFont.tres" type="DynamicFont" id=13]
+
+[sub_resource type="Animation" id=199]
+resource_name = "Close"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1.56917, 2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 2.21914, 0.466516 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2500 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "onCloseFinished"
+} ]
+}
+
+[sub_resource type="Animation" id=200]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1.56917 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 0.466516, 2.21914 ),
+"update": 0,
+"values": [ Vector2( 0, 2500 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=201]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="DynamicFont" id=16]
+size = 38
+outline_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -10
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=241]
+size = 18
+outline_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxTexture" id=230]
+texture = ExtResource( 3 )
+region_rect = Rect2( -31.4196, 0, 87.0222, 64.1349 )
+margin_left = 7.49648
+margin_right = 22.0208
+margin_top = 15.6563
+margin_bottom = 14.4243
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id=231]
+texture = ExtResource( 2 )
+region_rect = Rect2( -18.5532, 0.0862274, 69.5576, 461.484 )
+margin_left = 9.0065
+margin_right = 8.92128
+margin_top = 8.49884
+margin_bottom = 5.31932
+
+[sub_resource type="Theme" id=232]
+VScrollBar/styles/grabber = SubResource( 230 )
+VScrollBar/styles/grabber_highlight = SubResource( 230 )
+VScrollBar/styles/grabber_pressed = SubResource( 230 )
+VScrollBar/styles/scroll = SubResource( 231 )
+
+[sub_resource type="DynamicFont" id=161]
+size = 28
+outline_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+use_filter = true
+extra_spacing_bottom = 3
+extra_spacing_char = 1
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=297]
+size = 24
+outline_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+use_filter = true
+extra_spacing_bottom = 8
+font_data = ExtResource( 7 )
+
+[node name="PatchNotes" type="Node2D"]
+pause_mode = 2
+visible = false
+z_index = 20
+script = ExtResource( 6 )
+demoPatchnotes = "Backpack Battles is now available in Early Access!
+
+[b]0.9.0[/b]
+o Improved Steam Deck support
+o Added Traditional Chinese localization"
+chinese = "[center]各位玩家好！移动版将在 2 月 4 日正式推出！话说回来……今天我们也对当前版本进行了一些平衡性调整。
+
+希望各位玩儿的开心！更多消息，敬请期待 ;)
+
+[/center]
+o 现在吸血和尖刺在治疗/造成伤害时会播放动画效果
+
+[center][b]平衡改动[/b][/center]
+[center][b]通用[/b][/center]
+o 宝藏掉落几率恢复正常（圣诞奖励已结束）
+o 红宝石幼龙：狂热 4 -> 5
+o 光剑：花费 10g -> 9g
+o 猎鹰战刃：增加 2 个槽位
+o 十字剑：速度加成 60% -> 65%
+o 霜冻之剑：吸血 5 -> 7
+o 火辣香蕉：灼烧触发概率 75% -> 85%
+o 全身防护：冷却时间 5s -> 4.5s
+o 狼徽章：伤害减免 22% -> 25%
+
+[center][b]游侠[/b][/center]
+o 大师雪人：冷却时间 1.7s -> 1.5s
+o 弓箭：费用 7g -> 6g
+
+[center][b]收割者[/b][/center]
+o 不愈法杖：治疗量 25 -> 28
+o 剧毒黏黏：治疗量 9 -> 10
+o 剧毒蛙：冷却时间 2.4s -> 2.1s
+o 致幻蘑菇：冷却时间 3.6s -> 3.5s
+
+[center][b]火焰魔导士[/b][/center]
+o 日耀盾牌：伤害减免 17 -> 18
+
+[center][b]狂战士[/b][/center]
+o 愤怒加倍：延迟 3s -> 2s
+o 龙骑士：吸血上限 20% -> 25%
+
+[center][b]法师[/b][/center]
+o 吞噬圆球：冷却时间 1.9s -> 1.7s
+o 幽灵獾：冷却时间 4.2s -> 4.5s
+o 幽灵猫：冷却时间 4s -> 3.7s
+o 哈洛德，仇恨之帽：不愈效果 5% -> 4%
+o 魔法杯糕黏黏：治疗量 30 -> 35
+o 拼图背包：速度加成 55% -> 50%
+o 终极升腾：冰冷 1 -> 2
+
+[center][b]冒险家[/b][/center]
+o 超长矛：耐力消耗 1.7 -> 1.5"
+japanese = "[center]皆さんこんにちは！2月4日リリース予定のモバイル版はご存知ですか？本日は少しバランスを調整したいと思います。
+
+続報をお楽しみに ;)
+
+[/center]
+o 吸血とトゲでの回復/ダメージ時のアニメーションを追加
+
+[center][b]バージョン1.0.10の変更内容[/b][/center]
+[center][b]共通[/b][/center]
+o クリスマスシーズンが終わったため掘出物の出現確率を通常に戻します！
+o ルビーの幼竜：ヒート 4 ▷ 5
+o ライトセイバー：価格 10G ▷ 9G
+o ハヤブサのつるぎ：☆スロット 2追加
+o クロスブレード：使用速度ボーナス 60% ▷ 65%
+o フロストバイト：吸血 5 ▷ 7
+o スパイシーバナナ：ヒート獲得確率 75% ▷ 85%
+o 全身防備：クールダウン 5秒 ▷ 4.5秒
+o ウルフバッジ：ダメージ軽減 22% ▷ 25%
+
+[center][b]レンジャー[/b][/center]
+o スノーマスター：クールダウン 1.7秒 ▷ 1.5秒
+o 弓矢：価格 7G ▷ 6G
+
+[center][b]リーパー[/b][/center]
+o 癒さずの杖：回復量 25 ▷ 28
+o ポイズン・スラバート：回復量 9 ▷ 10
+o ドクガエル：クールダウン 2.4秒 ▷ 2.1秒
+o ベニテングダケ：クールダウン 3.6秒 ▷ 3.5秒
+
+[center][b]パイロマンサー[/b][/center]
+o 太陽の盾：ダメージ軽減 17 ▷ 18
+
+[center][b]バーサーカー[/b][/center]
+o さらなる怒り：発動遅延 3秒 ▷ 2秒
+o ドラゴンセット：体力吸収率上限 20% ▷ 25%
+
+[center][b]メイジ[/b][/center]
+o 貪食のスフィア：クールダウン 1.9秒 ▷ 1.7秒
+o アナグマの精霊：クールダウン 4.2秒 ▷ 4.5秒
+o ネコの精霊：クールダウン 4秒 ▷ 3.7秒
+o 憎たらしい帽子・ハロルド：暗黒アイテムごとのアンヒーリング 5% ▷ 4%
+o カップケーキ・スラバート：回復量 30 ▷ 35
+o パズルボックス：使用速度ボーナス 55% ▷ 50%
+o 超覚醒：フリーズ 1 ▷ 2
+
+[center][b]アドベンチャラー[/b][/center]
+o ベリーロングスピア：スタミナ消費値 1.7 ▷ 1.5"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -2299.0
+margin_top = -3000.0
+margin_right = 4329.0
+margin_bottom = 5000.0
+color = Color( 0, 0, 0, 0.47451 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Close = SubResource( 199 )
+anims/Open = SubResource( 200 )
+anims/RESET = SubResource( 201 )
+
+[node name="Sheet" type="Sprite" parent="."]
+position = Vector2( 978, 541.822 )
+rotation = 1.5708
+scale = Vector2( 1.39533, 1.5662 )
+texture = ExtResource( 4 )
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 792.0
+margin_top = 178.0
+margin_right = 1138.0
+margin_bottom = 210.0
+custom_colors/font_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_colors/font_color_shadow = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 16 )
+text = "~ Patch Notes ~"
+align = 1
+valign = 1
+
+[node name="Label5" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.458824 )
+margin_left = 602.0
+margin_top = 871.0
+margin_right = 1375.0
+margin_bottom = 911.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 389, 20 )
+custom_colors/font_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_colors/font_color_shadow = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 241 )
+text = "Click version to reopen."
+align = 1
+valign = 1
+script = ExtResource( 11 )
+translationKey = "HINT_PatchNotes"
+
+[node name="Version" type="Label" parent="." groups=["NotLocalized"]]
+margin_left = 870.5
+margin_top = 222.0
+margin_right = 1060.5
+margin_bottom = 254.0
+custom_colors/font_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_colors/font_color_shadow = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 16 )
+text = "Version 1.0.0"
+align = 1
+valign = 1
+
+[node name="Divider2" type="Sprite" parent="."]
+position = Vector2( 973.5, 259 )
+scale = Vector2( 1, 0.500001 )
+texture = ExtResource( 10 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 502.0
+margin_top = 326.0
+margin_right = 1495.0
+margin_bottom = 753.0
+rect_clip_content = false
+theme = SubResource( 232 )
+custom_colors/default_color = Color( 0.235294, 0.14902, 0.113725, 1 )
+custom_fonts/bold_font = SubResource( 161 )
+custom_fonts/normal_font = SubResource( 297 )
+bbcode_enabled = true
+bbcode_text = "[center]Hi everyone! Did you know the mobile version of Backpack Battles 
+is launching February 4th? Anyway… today, we do a little balancing.
+
+Have fun and stay tuned for more news ;)
+
+[/center]
+o The Vampirism and Spikes counters now play an animation when 
+   healing/dealing damage
+
+[center][b]Balancing[/b][/center]
+[center][b]Neutral[/b][/center]
+o Treasure chances are back to normal after the Christmas bonus!
+o Ruby Whelp: Heat 4 -> 5
+o Lightsaber: Cost 10g -> 9g
+o Falcon Blade: Added 2 * slots
+o Cross Blades: Speed bonus 60% -> 65%
+o Frostbite: Vampirism 5 -> 7
+o Spicy Banana: Heat chance 75% -> 85%
+o Full Body Protection: Cooldown 5s -> 4.5s
+o Wolf Badge: Damage reduction 22% -> 25%
+
+[center][b]Ranger[/b][/center]
+o Snowmaster: Cooldown 1.7s -> 1.5s
+o Bow and Arrow: Cost 7g -> 6g
+
+[center][b]Reaper[/b][/center]
+o Staff of Unhealing: Heal 25 -> 28
+o Poison Goobert: Heal 9 -> 10
+o Poison Frog: Cooldown 2.4s -> 2.1s
+o Fly Agaric: Cooldown 3.6s -> 3.5s
+
+[center][b]Pyromancer[/b][/center]
+o Sun Shield: Damage reduction 17 -> 18
+
+[center][b]Berserker[/b][/center]
+o Extra Angy: Delay 3s -> 2s
+o Dragon Set: Lifesteal limit 20% -> 25
+
+[center][b]Mage[/b][/center]
+o Devouring Sphere: Cooldown 1.9s -> 1.7s
+o Badger Spirit Companion: Cooldown 4.2s -> 4.5s
+o Cat Spirit Companion: Cooldown 4s -> 3.7s
+o Harold, the Hateful Hat: Unhealing per Dark item 5% -> 4%
+o Cupcake Goobert: Heal 30 -> 35
+o Puzzlebox: Speed bonus 55% -> 50%
+o Ultima Ascension: Cold 1 -> 2
+
+[center][b]Adventurer[/b][/center]
+o Very Long Spear: Stamina cost 1.7 -> 1.5"
+text = "Hi everyone! Did you know the mobile version of Backpack Battles 
+is launching February 4th? Anyway… today, we do a little balancing.
+
+Have fun and stay tuned for more news ;)
+
+
+o The Vampirism and Spikes counters now play an animation when 
+   healing/dealing damage
+
+Balancing
+Neutral
+o Treasure chances are back to normal after the Christmas bonus!
+o Ruby Whelp: Heat 4 -> 5
+o Lightsaber: Cost 10g -> 9g
+o Falcon Blade: Added 2 * slots
+o Cross Blades: Speed bonus 60% -> 65%
+o Frostbite: Vampirism 5 -> 7
+o Spicy Banana: Heat chance 75% -> 85%
+o Full Body Protection: Cooldown 5s -> 4.5s
+o Wolf Badge: Damage reduction 22% -> 25%
+
+Ranger
+o Snowmaster: Cooldown 1.7s -> 1.5s
+o Bow and Arrow: Cost 7g -> 6g
+
+Reaper
+o Staff of Unhealing: Heal 25 -> 28
+o Poison Goobert: Heal 9 -> 10
+o Poison Frog: Cooldown 2.4s -> 2.1s
+o Fly Agaric: Cooldown 3.6s -> 3.5s
+
+Pyromancer
+o Sun Shield: Damage reduction 17 -> 18
+
+Berserker
+o Extra Angy: Delay 3s -> 2s
+o Dragon Set: Lifesteal limit 20% -> 25
+
+Mage
+o Devouring Sphere: Cooldown 1.9s -> 1.7s
+o Badger Spirit Companion: Cooldown 4.2s -> 4.5s
+o Cat Spirit Companion: Cooldown 4s -> 3.7s
+o Harold, the Hateful Hat: Unhealing per Dark item 5% -> 4%
+o Cupcake Goobert: Heal 30 -> 35
+o Puzzlebox: Speed bonus 55% -> 50%
+o Ultima Ascension: Cold 1 -> 2
+
+Adventurer
+o Very Long Spear: Stamina cost 1.7 -> 1.5"
+script = ExtResource( 5 )
+
+[node name="CloseButton" type="Button" parent="."]
+margin_left = 830.0
+margin_top = 811.0
+margin_right = 970.0
+margin_bottom = 869.0
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 1, 0.92549, 0.831373, 1 )
+custom_colors/font_color_focus = Color( 1, 0.890196, 0.215686, 1 )
+custom_colors/font_color = Color( 1, 0.92549, 0.831373, 1 )
+custom_colors/font_color_hover = Color( 1, 0.890196, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.92549, 0.831373, 1 )
+custom_fonts/font = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+text = "Close"
+flat = true
+script = ExtResource( 1 )
+translationKey = "BUTTON_Close"
+
+[node name="UpdateButton" type="Button" parent="."]
+visible = false
+margin_left = 660.0
+margin_top = 811.0
+margin_right = 800.0
+margin_bottom = 869.0
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 1, 0.92549, 0.831373, 1 )
+custom_colors/font_color_focus = Color( 1, 0.890196, 0.215686, 1 )
+custom_colors/font_color = Color( 1, 0.92549, 0.831373, 1 )
+custom_colors/font_color_hover = Color( 1, 0.890196, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.92549, 0.831373, 1 )
+custom_fonts/font = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+text = "Update"
+flat = true
+script = ExtResource( 1 )
+translationKey = ""
+
+[node name="IgnoreButton" type="Button" parent="."]
+visible = false
+margin_left = 1000.0
+margin_top = 811.0
+margin_right = 1140.0
+margin_bottom = 869.0
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 1, 0.92549, 0.831373, 1 )
+custom_colors/font_color_focus = Color( 1, 0.890196, 0.215686, 1 )
+custom_colors/font_color = Color( 1, 0.92549, 0.831373, 1 )
+custom_colors/font_color_hover = Color( 1, 0.890196, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.92549, 0.831373, 1 )
+custom_fonts/font = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+text = "Don't remind"
+flat = true
+script = ExtResource( 1 )
+translationKey = ""
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="animationFinished"]
+[connection signal="pressed" from="CloseButton" to="." method="onClosePressed"]
+[connection signal="pressed" from="UpdateButton" to="." method="onUpdatePressed"]
+[connection signal="pressed" from="IgnoreButton" to="." method="onIgnorePressed"]

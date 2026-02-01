@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/Paper1.png" type="Texture" id=1]
 [ext_resource path="res://Interface/FocusGrabbingControl.gd" type="Script" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://Items/Particles/SubtractiveCanvasItem.material" type="Material" id=17]
 [ext_resource path="res://Interface/ScrollbarTheme.tres" type="Theme" id=18]
 [ext_resource path="res://Interface/BuildHistory/RoundResultCursor.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Combat.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Fonts/LibreBaskerville-Bold.ttf" type="DynamicFontData" id=21]
 [ext_resource path="res://Interface/Tooltips/ImageFont.tres" type="BitmapFont" id=22]
 [ext_resource path="res://Interface/HintButton.png" type="Texture" id=23]
@@ -28,10 +27,11 @@
 [ext_resource path="res://Interface/DraggableScrollContainer.gd" type="Script" id=26]
 [ext_resource path="res://Interface/BuildHistory/BattleButton.png" type="Texture" id=27]
 [ext_resource path="res://Interface/BuildHistory/BattleButton_hovered.png" type="Texture" id=28]
-[ext_resource path="res://Interface/Searchbar.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Assets/Buffs/Block.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Copy.png" type="Texture" id=31]
-[ext_resource path="res://Interface/Tooltips/TooltipBase2.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Combat.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Copy.png" type="Texture" id=30]
+[ext_resource path="res://Interface/Tooltips/TooltipBase2.png" type="Texture" id=31]
+[ext_resource path="res://Interface/Searchbar.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Assets/Buffs/Block.png" type="Texture" id=33]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Close"
@@ -137,18 +137,6 @@ outline_color = Color( 0.235294, 0.14902, 0.113725, 1 )
 use_filter = true
 extra_spacing_bottom = -8
 font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 60
-outline_size = 6
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 21 )
-
-[sub_resource type="DynamicFont" id=10]
-size = 51
-outline_size = 6
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 21 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 30
@@ -305,35 +293,6 @@ texture_disabled = ExtResource( 12 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 13 )
-showOnHover = NodePath("../../Build/Battle")
-
-[node name="SaveToFightButton" type="TextureButton" parent="Build"]
-visible = false
-margin_left = 1205.0
-margin_top = 939.0
-margin_right = 1255.0
-margin_bottom = 989.0
-rect_pivot_offset = Vector2( -2168, 282 )
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 28 )
-texture_disabled = ExtResource( 12 )
-expand = true
-script = ExtResource( 13 )
-showOnHover = NodePath("../../Build/Battle")
-
-[node name="FightWithSavedButton" type="TextureButton" parent="Build"]
-visible = false
-margin_left = 1128.0
-margin_top = 934.0
-margin_right = 1178.0
-margin_bottom = 984.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 28 )
-texture_disabled = ExtResource( 12 )
-expand = true
-script = ExtResource( 13 )
 showOnHover = NodePath("../Battle")
 
 [node name="CopyBuildUI" type="Node2D" parent="."]
@@ -344,7 +303,7 @@ margin_top = 165.0
 margin_right = 1153.0
 margin_bottom = 245.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 31 )
+texture_normal = ExtResource( 30 )
 expand = true
 script = ExtResource( 13 )
 
@@ -354,7 +313,7 @@ margin_top = 162.0
 margin_right = 1241.0
 margin_bottom = 242.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 20 )
+texture_normal = ExtResource( 29 )
 expand = true
 script = ExtResource( 13 )
 
@@ -379,8 +338,8 @@ margin_top = 157.0
 margin_right = 1188.0
 margin_bottom = 257.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 30 )
-texture_hover = ExtResource( 30 )
+texture_normal = ExtResource( 33 )
+texture_hover = ExtResource( 33 )
 texture_disabled = ExtResource( 12 )
 expand = true
 stretch_mode = 5
@@ -396,7 +355,7 @@ margin_left = -144.0
 margin_top = -60.0
 margin_right = 156.0
 margin_bottom = 139.0
-texture = ExtResource( 32 )
+texture = ExtResource( 31 )
 patch_margin_left = 60
 patch_margin_top = 123
 patch_margin_right = 80
@@ -438,7 +397,7 @@ margin_left = -200.0
 margin_top = -60.0
 margin_right = 200.0
 margin_bottom = 80.0
-texture = ExtResource( 32 )
+texture = ExtResource( 31 )
 patch_margin_left = 60
 patch_margin_top = 123
 patch_margin_right = 80
@@ -580,7 +539,7 @@ align = 1
 script = ExtResource( 10 )
 translationKey = "BUTTON_BuildHistory"
 
-[node name="Searchbar" parent="." instance=ExtResource( 29 )]
+[node name="Searchbar" parent="." instance=ExtResource( 32 )]
 visible = false
 margin_left = 68.0
 margin_top = 85.0
@@ -657,8 +616,6 @@ translationKey = "HINT_HistoryReset"
 [connection signal="pressed" from="Build/PreviousRound" to="." method="onPreviousRoundPressed"]
 [connection signal="pressed" from="Build/NextRound" to="." method="onNextRoundPressed"]
 [connection signal="pressed" from="Build/FightButton" to="." method="fightBuild"]
-[connection signal="pressed" from="Build/SaveToFightButton" to="." method="saveCurrentBuild"]
-[connection signal="pressed" from="Build/FightWithSavedButton" to="." method="fightBuildWithSaved"]
 [connection signal="pressed" from="CloseButton" to="." method="close"]
 [connection signal="pressed" from="CopyBuildUI/CopyBuildButton" to="." method="onCopyBuildPressed"]
 [connection signal="pressed" from="CopyBuildUI/FightWithClipBoardButton" to="." method="fightBuildWithClipboard"]
