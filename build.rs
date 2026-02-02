@@ -1,3 +1,4 @@
+#[cfg(windows)]
 fn main() {
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
         return;
@@ -10,3 +11,6 @@ fn main() {
     res.set_icon("icon.ico");
     res.compile().unwrap();
 }
+
+#[cfg(not(windows))]
+fn main() {}
