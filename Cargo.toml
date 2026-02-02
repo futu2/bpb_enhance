@@ -11,6 +11,9 @@ path = "src/main.rs"
 cli = ["clap"]
 gui = ["gpui", "gpui-component", "rfd", "rust-embed"]
 
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"
+
 [dependencies]
 anyhow = "1.0.100"
 binrw = "0.15.0"
