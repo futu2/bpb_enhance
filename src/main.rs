@@ -1,6 +1,7 @@
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
 mod pck;
+mod steam;
 mod tweak;
 
 use std::path::PathBuf;
@@ -210,7 +211,7 @@ impl RootView {
                     .bg(cx.theme().accent)
                     .text_xs()
                     .text_color(cx.theme().accent_foreground)
-                    .child("检测到默认游戏路径")
+                    .child("已自动检测到游戏路径")
                     .into_any_element(),
             ]
         } else {
@@ -309,12 +310,16 @@ impl RootView {
 
 #[cfg(feature = "gui")]
 fn detect_default_path() -> Option<String> {
-    let default = PathBuf::from(DEFAULT_STEAM_PATH).join(DEFAULT_PCK_NAME);
-    if default.exists() {
-        default.to_str().map(|s| s.to_string())
-    } else {
-        None
+    // 1) Try Steam multi-library detection.
+    if let Some(p) = steam::detect_backpack_battles_pck() {
+        return p.to_str().map(|s| s.to_string());
     }
+
+    // 2) Fallback to historical hardcoded default Steam path.
+    let default = PathBuf::from(DEFAULT_STEAM_PATH).join(DEFAULT_PCK_NAME);
+    default
+        .is_file()
+        .then(|| default.to_string_lossy().to_string())
 }
 
 #[cfg(feature = "gui")]
